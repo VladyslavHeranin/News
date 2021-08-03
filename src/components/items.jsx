@@ -80,7 +80,6 @@ export const Items = () => {
                                         setCurrent([])
                                         setPage(1)
                                         dispatch(Newest(page))
-
                                     }}
                                 >
                                     Newest
