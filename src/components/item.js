@@ -9,7 +9,7 @@ export const Item = ({ item }) => {
                 </a>
 
                 {item.domain !== undefined ?
-                        <p className="value_title">  <span className="value_name">Title: </span>  <span className="value">{item.domain}</span> </p>
+                        <p className="value_title">  <span className="value_name">Domain: </span>  <span className="value">{item.domain}</span> </p>
                         :
                         <p className="value_title"> <span className="value_name">Domain: </span>  <span className="value">domain not specified</span> </p>
                 }
