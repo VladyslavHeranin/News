@@ -11,13 +11,34 @@ import { Item } from "./item"
 
 export const Items = () => {
 
+
+    const isAuth = useSelector(state => state.topik)
+
+
     const [page, setPage] = useState(1)
     const [current, setCurrent] = useState([])
     const [sort, setSort] = useState("active")
 
     const dispatch = useDispatch()
 
-    const isAuth = useSelector(state => state.topik)
+    useEffect(() => {
+        document.addEventListener("scroll", scrollDown)
+        return function () {
+            document.removeEventListener("scroll", scrollDown)
+        }
+    }, [isAuth])
+
+
+    const scrollDown = (e) => {
+
+        let res = isAuth.posts > page
+
+        if ((e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) && res) {
+            setPage(prevPage => prevPage + 1)
+        }
+    }
+
+
 
     useEffect(() => {
         dispatch(News(page))
@@ -129,9 +150,9 @@ export const Items = () => {
                                     {current.map((item, id) => <Item item={item} key={id} />)}
 
                                 </div>
-                                {isAuth.posts > page && <button className="buttonIncriment" onClick={() => {
+                                {/* {isAuth.posts > page && <button className="buttonIncriment" onClick={() => {
                                     setPage(prevPage => prevPage + 1)
-                                }}>Lode more</button>}
+                                }}>Lode more</button>} */}
                             </div>
                         </div>
                     </div>
